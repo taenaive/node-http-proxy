@@ -29,7 +29,7 @@ var https = require('https'),
     util  = require('util'),
     path  = require('path'),
     fs    = require('fs'),
-    colors = require('colors'),
+    //colors = require('colors'), //deprecated
     httpProxy = require('./lib/http-proxy'),
     fixturesDir = path.join(__dirname, 'test', 'fixtures');
 
@@ -57,5 +57,5 @@ httpProxy.createServer({
   }
 }).listen(443);
 
-util.puts('https proxy server'.blue + ' started '.green.bold + 'on port '.blue + '443'.yellow);
+util.puts('https proxy server'+ ' started ' + 'on port ' + '443');
 //util.puts('http server '.blue + 'started '.green.bold + 'on port '.blue + '9009 '.yellow);
