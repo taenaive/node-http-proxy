@@ -37,11 +37,11 @@ var https = require('https'),
 //
 // Create the target HTTP server 
 //
-// http.createServer(function (req, res) {
-//   res.writeHead(200, { 'Content-Type': 'text/plain' });
-//   res.write('hello http over https\n');
-// 	res.end();
-// }).listen(9009);
+http.createServer(function (req, res) {
+  res.writeHead(301, { 'Content-Type': 'text/plain' });
+  'Location':'https://'+req.headers.host+req.url
+     res.end('Redirecting to SSL\n');
+  }).listen(80);
 
 //
 // Create the HTTPS proxy server listening on port 8000
