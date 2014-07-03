@@ -48,8 +48,8 @@ http.createServer(function (req, res) {
 //
 httpProxy.createServer({
   target: {
-    host: 'localhost',
-    port: 3000
+    host: '192.168.0.3',
+    port: 8892
   },
   ssl: {
     key: fs.readFileSync(path.join(fixturesDir, 'agent2-key.pem'), 'utf8'),
