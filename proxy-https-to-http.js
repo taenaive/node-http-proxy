@@ -38,8 +38,9 @@ var https = require('https'),
 // Create the target HTTP server 
 //
 http.createServer(function (req, res) {
-  res.writeHead(301, { 'Content-Type': 'text/plain' });
-  'Location':'https://'+req.headers.host+req.url
+  res.writeHead(301, { 'Content-Type': 'text/plain' , 
+                       'Location'    : 'https://'+req.headers.host+req.url});
+  
      res.end('Redirecting to SSL\n');
   }).listen(80);
 
