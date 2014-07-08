@@ -42,12 +42,12 @@ var https = require('https'),
 //   }
 // }).listen(8001);
 
-http.createServer(function (req, res) {
-  res.writeHead(301, { 'Content-Type': 'text/plain' , 
-                       'Location'    : 'https://'+'taeyoon.info:8002'+req.url});
+// http.createServer(function (req, res) {
+//   res.writeHead(301, { 'Content-Type': 'text/plain' , 
+//                        'Location'    : 'https://'+'taeyoon.info:8002'+req.url});
   
-     res.end('Redirecting to SOA\n');
-  }).listen(8001);
+//      res.end('Redirecting to SOA\n');
+//   }).listen(8001);
 //
 // Create the HTTPS proxy server listening on port 8002 to SOA server()
 //
