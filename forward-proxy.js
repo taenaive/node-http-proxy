@@ -31,7 +31,7 @@ var https = require('https'),
     fs    = require('fs'),
     fixturesDir = path.join(__dirname, 'test', 'fixtures'),
     httpProxy = require('./lib/http-proxy'),
-    httpProxyToSoa = require('./lib/http-proxy');
+//    httpProxyToSoa = require('./lib/http-proxy');
 //
 // Setup proxy server with forwarding (http 8001 to https 8002)
 //
@@ -44,22 +44,22 @@ var https = require('https'),
 
 http.createServer(function (req, res) {
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
-                       'Location'    : 'http://'+'192.168.0.6:8001'+req.url});
+                       'Location'    : 'http://'+'taeyoon.info:8002'+req.url});
   
      res.end('Redirecting to SOA\n');
   }).listen(8001);
-// //
-// // Create the HTTPS proxy server listening on port 8002 to SOA server()
-// //
-// httpProxy.createServer({
-//   target: {
-//     host: '192.168.0.6',
-//     port: 8001
-//   },
-//   ssl: {
-//     key: fs.readFileSync(path.join(fixturesDir, 'agent2-key.pem'), 'utf8'),
-//     cert: fs.readFileSync(path.join(fixturesDir, 'agent2-cert.pem'), 'utf8')
-//   }
-// }).listen(8002);
+//
+// Create the HTTPS proxy server listening on port 8002 to SOA server()
+//
+httpProxy.createServer({
+  target: {
+    host: '192.168.0.6',
+    port: 8001
+  },
+  ssl: {
+    key: fs.readFileSync(path.join(fixturesDir, 'agent2-key.pem'), 'utf8'),
+    cert: fs.readFileSync(path.join(fixturesDir, 'agent2-cert.pem'), 'utf8')
+  }
+}).listen(8002);
 
 util.puts('http proxy server ' + 'started '+ 'on port ' + '8001 ' + 'with forward proxy');
