@@ -37,7 +37,7 @@ var https = require('https'),
 //
 httpProxy.createServer({
   forward: {
-    port: 8002,
+    port: 8001,
     host: '192.168.0.6'
   }
 }).listen(8001);
