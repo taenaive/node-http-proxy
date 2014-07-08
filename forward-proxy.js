@@ -44,7 +44,7 @@ var https = require('https'),
 
 http.createServer(function (req, res) {
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
-                       'Location'    : 'http://'+'taeyoon.info:8002'+req.url});
+                       'Location'    : 'https://'+'taeyoon.info:8002'+req.url});
   
      res.end('Redirecting to SOA\n');
   }).listen(8001);
