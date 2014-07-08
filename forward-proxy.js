@@ -29,9 +29,8 @@ var https = require('https'),
     util  = require('util'),
     path  = require('path'),
     fs    = require('fs'),
-    
-    fixturesDir = path.join(__dirname, 'test', 'fixtures');
-    httpProxy = require('./lib/http-proxy');
+    fixturesDir = path.join(__dirname, 'test', 'fixtures'),
+    httpProxy = require('./lib/http-proxy'),
     httpProxyToSoa = require('./lib/http-proxy');
 //
 // Setup proxy server with forwarding (http 8001 to https 8002)
@@ -46,7 +45,7 @@ httpProxy.createServer({
 //
 // Create the HTTPS proxy server listening on port 8002 to SOA server()
 //
-httpProxyToSoa.createServer({
+httpProxy.createServer({
   target: {
     host: '192.168.0.6',
     port: 8001
