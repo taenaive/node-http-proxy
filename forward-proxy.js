@@ -57,8 +57,10 @@ httpProxy.createServer({
     port: 8001
   },
   ssl: {
-    key: fs.readFileSync(path.join(fixturesDir, 'agent2-key.pem'), 'utf8'),
-    cert: fs.readFileSync(path.join(fixturesDir, 'agent2-cert.pem'), 'utf8')
+    cert : fs.readFileSync(path.join(__dirname, './fakecerts/ca2/', 'server2.crt')),
+     key  : fs.readFileSync(path.join(__dirname, './fakecerts', 'server.key')),
+     ca   : fs.readFileSync(path.join(__dirname, './fakecerts/ca2/', 'ca2.crt')),
+     passphrase: 'tae123456'
   }
 }).listen(443);
 
