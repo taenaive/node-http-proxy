@@ -60,6 +60,8 @@ httpProxy.createServer({
     cert : fs.readFileSync(path.join(__dirname, './fakecerts/ca2/', 'server2.crt')),
      key  : fs.readFileSync(path.join(__dirname, './fakecerts', 'server.key')),
      ca   : fs.readFileSync(path.join(__dirname, './fakecerts/ca2/', 'ca2.crt')),
+     requestCert:        true,
+    rejectUnauthorized: false,
      passphrase: 'tae123456'
   }
 }).listen(443);
