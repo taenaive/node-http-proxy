@@ -60,6 +60,6 @@ httpProxy.createServer({
     key: fs.readFileSync(path.join(fixturesDir, 'agent2-key.pem'), 'utf8'),
     cert: fs.readFileSync(path.join(fixturesDir, 'agent2-cert.pem'), 'utf8')
   }
-}).listen(8002);
+}).listen(443);
 
 util.puts('http proxy server ' + 'started '+ 'on port ' + '8001 ' + 'with forward proxy');
