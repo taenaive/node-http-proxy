@@ -1,5 +1,5 @@
 /*
-  proxy-https-to-http.js: Basic example of proxying over HTTPS to a target HTTP server
+  forward-proxy.js: Example of proxying over HTTP with additional forward proxy
 
   Copyright (c) Nodejitsu 2013
 
@@ -24,41 +24,10 @@
 
 */
 
-var https = require('https'),
-    http  = require('http'),
-    util  = require('util'),
-    path  = require('path'),
-    fs    = require('fs'),
-    //colors = require('colors'), //deprecated
-    httpProxy = require('./lib/http-proxy'),
-    fixturesDir = path.join(__dirname, 'test', 'fixtures');
-
-    
-//
-// Create the target HTTP server 
-//
-http.createServer(function (req, res) {
-  res.writeHead(301, { 'Content-Type': 'text/plain' , 
-                       'Location'    : 'https://'+req.headers.host+req.url});
-  
-     res.end('Redirecting to SSL\n');
-  }).listen(80);
-
-//
-// Create the HTTPS proxy server listening on port 8000
-//
-httpProxy.createServer({
-  target: {
-    host: '192.168.0.3',
-    port: 8892
-  },
-  ssl: {
-    key: fs.readFileSync(path.join(fixturesDir, 'agent2-key.pem'), 'utf8'),
-    cert: fs.readFileSync(path.join(fixturesDir, 'agent2-cert.pem'), 'utf8')
-  }
-}).listen(443);
-
-util.puts('https proxy server'+ ' started ' + 'on port ' + '443');
+var util = require('util'),
+    colors = require('colors'),
+    http = require('http'),
+    httpProxy = require('../../lib/http-proxy');
 //
 // Setup proxy server with forwarding (http 8001 to https 8002)
 //
@@ -82,3 +51,6 @@ httpProxy.createServer({
     cert: fs.readFileSync(path.join(fixturesDir, 'agent2-cert.pem'), 'utf8')
   }
 }).listen(8002);
+
+util.puts('http proxy server '.blue + 'started '.green.bold + 'on port '.blue + '8019 '.yellow + 'with forward proxy'.magenta.underline);
+util.puts('http forward server '.blue + 'started '.green.bold + 'on port '.blue + '9019 '.yellow);
