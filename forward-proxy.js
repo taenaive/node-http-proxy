@@ -30,7 +30,7 @@ var https = require('https'),
     path  = require('path'),
     fs    = require('fs'),
     fixturesDir = path.join(__dirname, 'test', 'fixtures'),
-    httpProxy = require('./lib/http-proxy'),
+    httpProxy = require('./lib/http-proxy');
 //    httpProxyToSoa = require('./lib/http-proxy');
 //
 // Setup proxy server with forwarding (http 8001 to https 8002)
