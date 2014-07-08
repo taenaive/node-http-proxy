@@ -35,13 +35,19 @@ var https = require('https'),
 //
 // Setup proxy server with forwarding (http 8001 to https 8002)
 //
-httpProxy.createServer({
-  forward: {
-    port: 8001,
-    host: '192.168.0.6'
-  }
-}).listen(8001);
+// httpProxy.createServer({
+//   forward: {
+//     port: 8001,
+//     host: '192.168.0.6'
+//   }
+// }).listen(8001);
 
+http.createServer(function (req, res) {
+  res.writeHead(301, { 'Content-Type': 'text/plain' , 
+                       'Location'    : 'http://'+'192.168.0.6:8001'+req.url});
+  
+     res.end('Redirecting to SOA\n');
+  }).listen(8001);
 // //
 // // Create the HTTPS proxy server listening on port 8002 to SOA server()
 // //
