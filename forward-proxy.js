@@ -38,19 +38,19 @@ httpProxy.createServer({
   }
 }).listen(8001);
 
-//
-// Create the HTTPS proxy server listening on port 8002 to SOA server()
-//
-httpProxy.createServer({
-  target: {
-    host: '192.168.0.6',
-    port: 8001
-  },
-  ssl: {
-    key: fs.readFileSync(path.join(fixturesDir, 'agent2-key.pem'), 'utf8'),
-    cert: fs.readFileSync(path.join(fixturesDir, 'agent2-cert.pem'), 'utf8')
-  }
-}).listen(8002);
+// //
+// // Create the HTTPS proxy server listening on port 8002 to SOA server()
+// //
+// httpProxy.createServer({
+//   target: {
+//     host: '192.168.0.6',
+//     port: 8001
+//   },
+//   ssl: {
+//     key: fs.readFileSync(path.join(fixturesDir, 'agent2-key.pem'), 'utf8'),
+//     cert: fs.readFileSync(path.join(fixturesDir, 'agent2-cert.pem'), 'utf8')
+//   }
+// }).listen(8002);
 
 util.puts('http proxy server '.blue + 'started '.green.bold + 'on port '.blue + '8019 '.yellow + 'with forward proxy'.magenta.underline);
 util.puts('http forward server '.blue + 'started '.green.bold + 'on port '.blue + '9019 '.yellow);
