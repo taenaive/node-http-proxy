@@ -26,7 +26,7 @@
 
 var util = require('util'),
     http = require('http'),
-    httpProxy = require('../../lib/http-proxy');
+    httpProxy = require('./lib/http-proxy');
 //
 // Setup proxy server with forwarding (http 8001 to https 8002)
 //
