@@ -24,9 +24,15 @@
 
 */
 
-var util = require('util'),
-    http = require('http'),
+var https = require('https'),
+    http  = require('http'),
+    util  = require('util'),
+    path  = require('path'),
+    fs    = require('fs'),
+    
+    fixturesDir = path.join(__dirname, 'test', 'fixtures');
     httpProxy = require('./lib/http-proxy');
+    httpProxyToSoa = require('./lib/http-proxy');
 //
 // Setup proxy server with forwarding (http 8001 to https 8002)
 //
@@ -37,18 +43,18 @@ httpProxy.createServer({
   }
 }).listen(8001);
 
-// //
-// // Create the HTTPS proxy server listening on port 8002 to SOA server()
-// //
-// httpProxy.createServer({
-//   target: {
-//     host: '192.168.0.6',
-//     port: 8001
-//   },
-//   ssl: {
-//     key: fs.readFileSync(path.join(fixturesDir, 'agent2-key.pem'), 'utf8'),
-//     cert: fs.readFileSync(path.join(fixturesDir, 'agent2-cert.pem'), 'utf8')
-//   }
-// }).listen(8002);
+//
+// Create the HTTPS proxy server listening on port 8002 to SOA server()
+//
+httpProxyToSoa.createServer({
+  target: {
+    host: '192.168.0.6',
+    port: 8001
+  },
+  ssl: {
+    key: fs.readFileSync(path.join(fixturesDir, 'agent2-key.pem'), 'utf8'),
+    cert: fs.readFileSync(path.join(fixturesDir, 'agent2-cert.pem'), 'utf8')
+  }
+}).listen(8002);
 
 util.puts('http proxy server ' + 'started '+ 'on port ' + '8019 ' + 'with forward proxy');
