@@ -1,4 +1,4 @@
-//place this to where it is not soa box
+//place this to where it is not web01
 var https = require('https'),
     http  = require('http'),
     util  = require('util'),
@@ -6,20 +6,20 @@ var https = require('https'),
     fs    = require('fs'),
     fixturesDir = path.join(__dirname, 'test', 'fixtures'),
     httpProxy = require('./lib/http-proxy');
-
+//forward to web01's https proxy in the browser
 http.createServer(function (req, res) {
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
-                       'Location'    : 'https://'+'198.135.15.92'+req.url}); //...18 for Test
-  
-     res.end('Redirecting to SOA\n');
-  }).listen(3000);
+                       'Location'    : 'https://'+'198.135.15.19'+req.url});
+  												//198.135.15.93 for dev
+     res.end('Redirecting to Web01\n');
+  }).listen(8892);
 //
-// Create the HTTPS proxy server listening on port 8002 to SOA server()
+// proxy HTTPS to Web01 internal ip
 //
 httpProxy.createServer({
   target: {
-    host: '192.168.0.6',
-    port: 8001
+    host: '192.168.0.3',
+    port: 8892
   },
   ssl: {
     cert : fs.readFileSync(path.join(__dirname, './fakecerts/ca2/', 'server2.crt')),
