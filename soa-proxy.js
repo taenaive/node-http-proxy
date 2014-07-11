@@ -9,10 +9,10 @@ var https = require('https'),
 
 http.createServer(function (req, res) {
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
-                       'Location'    : 'https://'+'198.135.15.92'+req.url}); //...18 for Test
+                       'Location'    : 'https://'+'mpstd-web01'+req.url}); //...18 for Test
   
      res.end('Redirecting to SOA\n');
-  }).listen(3000);
+  }).listen(8892);
 //
 // Create the HTTPS proxy server listening on port 8002 to SOA server()
 //
@@ -29,4 +29,4 @@ httpProxy.createServer({
   }
 }).listen(443);
 
-util.puts('http proxy server ' + 'started '+ 'on port ' + '8001 ' + 'with forward proxy');
+util.puts('http proxy server ' + 'started '+ 'on port ' + '443 ' + 'with forward proxy(8892)');
