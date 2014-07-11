@@ -26,7 +26,7 @@ var https = require('https'),
   var soa_bool = hostnameOnly.match(/soa/i);
   if (soa_bool){
     res.writeHead(301, { 'Content-Type': 'text/plain' , 
-                       'Location'    : 'https://'+hostnameOnly+':3000'+req.url});
+                       'Location'    : 'https://'+hostnameOnly+':3001'+req.url});
                           //198.135.15.93 for dev, 198.135.15.19 for test
      res.end('Redirecting to Soa\n');
   }
