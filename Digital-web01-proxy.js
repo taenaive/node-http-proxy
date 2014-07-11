@@ -1,6 +1,6 @@
 var https = require('https'),
     http  = require('http'),
-    http2  = require('http'),
+    //http2  = require('http'),
     util  = require('util'),
     path  = require('path'),
     fs    = require('fs'),
@@ -14,7 +14,7 @@ var https = require('https'),
      res.end('Redirecting to Web01\n');
   }).listen(8892);
 
- http2.createServer(function (req, res) {
+ http.createServer(function (req, res) {
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
                        'Location'    : 'https://'+'198.135.14.61'+req.url});
                           //198.135.15.93 for dev, 198.135.15.19 for test
