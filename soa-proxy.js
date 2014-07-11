@@ -9,7 +9,7 @@ var https = require('https'),
 
 http.createServer(function (req, res) {
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
-                       'Location'    : 'https://'+'mpstd-web01'+req.url}); //...18 for Test
+                       'Location'    : 'https://'+'198.135.14.61'+req.url}); //...18 for Test
   
      res.end('Redirecting to SOA\n');
   }).listen(8892);
