@@ -6,7 +6,7 @@ var https = require('https'),
     fixturesDir = path.join(__dirname, 'test', 'fixtures'),
     httpProxy = require('./lib/http-proxy');
 //forward to web01's https proxy in the browser
-// http.createServer(function (req, res) {
+ http.createServer(function (req, res) {
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
                        'Location'    : 'https://'+'198.135.14.61'+req.url});
   												//198.135.15.93 for dev, 198.135.15.19 for test
