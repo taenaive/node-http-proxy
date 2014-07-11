@@ -9,9 +9,9 @@ var https = require('https'),
 //forward to web01's https proxy in the browser
  http.createServer(function (req, res) {
   //get rid of port number
-  var index =req.headers.host.indexof(":");
-  var hostnameOnly = headers.host.substr(0,index); 
-  
+  var index =req.headers.host.indexOf(":");
+  var hostnameOnly = req.headers.host.substr(0,index);
+  console.log(hostnameOnly); 
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
                        'Location'    : 'https://'+hostnameOnly+req.url});
   												//198.135.15.93 for dev, 198.135.15.19 for test
