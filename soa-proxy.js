@@ -8,11 +8,14 @@ var https = require('https'),
     httpProxy = require('./lib/http-proxy');
 
 http.createServer(function (req, res) {
+  //get rid of port number
+  var index =req.headers.host.indexOf(":");
+  var hostnameOnly = req.headers.host.substr(0,index);
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
-                       'Location'    : 'https://'+'198.135.14.61'+req.url}); //...18 for Test
+                       'Location'    : 'https://'+hostnameOnly+':3001'+req.url}); //...18 for Test
   
      res.end('Redirecting to SOA\n');
-  }).listen(8892);
+  }).listen(8001);
 //
 // Create the HTTPS proxy server listening on port 8002 to SOA server()
 //
@@ -27,6 +30,6 @@ httpProxy.createServer({
      ca   : fs.readFileSync(path.join(__dirname, './fakecerts/ca2/', 'ca2.crt')),
      passphrase: 'tae123456'
   }
-}).listen(443);
+}).listen(3001);
 
-util.puts('http proxy server ' + 'started '+ 'on port ' + '443 ' + 'with forward proxy(8892)');
+util.puts('http proxy server ' + 'started '+ 'on port ' + '3001' + 'with forward proxy(8001)');

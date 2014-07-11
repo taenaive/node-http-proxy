@@ -11,7 +11,7 @@ var https = require('https'),
   //get rid of port number
   var index =req.headers.host.indexOf(":");
   var hostnameOnly = req.headers.host.substr(0,index);
-  console.log(hostnameOnly); 
+  //console.log(hostnameOnly); 
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
                        'Location'    : 'https://'+hostnameOnly+req.url});
   												//198.135.15.93 for dev, 198.135.15.19 for test
@@ -19,11 +19,26 @@ var https = require('https'),
   }).listen(8892);
 
  http.createServer(function (req, res) {
-  res.writeHead(301, { 'Content-Type': 'text/plain' , 
-                       'Location'    : 'https://'+req.headers.host+req.url});
+  //get rid of port number
+  var index =req.headers.host.indexOf(":");
+  var hostnameOnly = req.headers.host.substr(0,index);
+  //router
+  var soa_bool = hostnameOnly.match(/soa/i);
+  if (soa_bool){
+    res.writeHead(301, { 'Content-Type': 'text/plain' , 
+                       'Location'    : 'https://'+hostnameOnly+':3000'+req.url});
+                          //198.135.15.93 for dev, 198.135.15.19 for test
+     res.end('Redirecting to Soa\n');
+  }
+  else{//default
+    res.writeHead(301, { 'Content-Type': 'text/plain' , 
+                       'Location'    : 'https://'+hostnameOnly+req.url});
                           //198.135.15.93 for dev, 198.135.15.19 for test
      res.end('Redirecting to Web01\n');
+   }
+
   }).listen(80);
+  
 //
 // proxy HTTPS to Web01 internal ip
 //
