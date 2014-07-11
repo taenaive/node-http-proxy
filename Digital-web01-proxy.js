@@ -11,7 +11,8 @@ var https = require('https'),
   //get rid of port number
   var index =req.headers.host.indexOf(":");
   var hostnameOnly = req.headers.host.substr(0,index);
-  //console.log(hostnameOnly); 
+  console.log('Digital-web01-8892 hostname : ' +hostnameOnly); 
+  console.log('Digital-web01-8892 url part: '+ req.url);
   res.writeHead(301, { 'Content-Type': 'text/plain' , 
                        'Location'    : 'https://'+hostnameOnly+req.url});
   												//198.135.15.93 for dev, 198.135.15.19 for test
@@ -22,6 +23,8 @@ var https = require('https'),
   //get rid of port number
   var index =req.headers.host.indexOf(":");
   var hostnameOnly = req.headers.host.substr(0,index);
+  console.log('Digital-web01-80 hostname : ' +hostnameOnly); 
+  console.log('Digital-web01-80 url part: '+ req.url);
   //router
   var soa_bool = hostnameOnly.match(/soa/i);
   if (soa_bool){
