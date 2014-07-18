@@ -110,9 +110,9 @@ var soaProxy =httpProxy.createServer({
   }
 }).listen(3001);
 
-var soaProxy16200 =httpProxy.createServer({
+var web01Proxy16200 =httpProxy.createServer({
   target: {
-    host: '192.168.0.6',
+    host: '192.168.0.3',
     port: 16200
   },
   ssl: {
@@ -138,7 +138,7 @@ soaProxy.on('error', function (err, req, res) {
   });
   res.end('SOA went wrong. :-( \n' + "Proxy failed to connect to the Target URL=https://" + req.headers.host);
 });
-soaProxy16200.on('error', function (err, req, res) {
+web01Proxy16200.on('error', function (err, req, res) {
   console.log("Proxy failed to connect to the Target URL=https://" + req.headers.host);
   res.writeHead(500, {
     'Content-Type': 'text/plain'
