@@ -25,7 +25,7 @@ var https = require('https'),
   // console.log('Digital-web01-80 url part: '+ req.url);
   //router
 
-  if(req.headers.host == null){ res.end('Something went wrong.Host not found.') return;}
+  if(req.headers.host == null){ res.end('Something went wrong.Host not found.'); return;}
   var soa_bool = req.headers.host.match(/soa/i);
    if (soa_bool){
     res.writeHead(301, { 'Content-Type': 'text/plain' , 
