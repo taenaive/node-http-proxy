@@ -146,4 +146,4 @@ web01Proxy16200.on('error', function (err, req, res) {
   res.end('SOA 16200 went wrong. :-( \n' + "Proxy failed to connect to the Target URL=https://" + req.headers.host);
 });
 
-util.puts('http proxy server ' + 'started '+ 'on port ' + '80,8892 ->443 ');
+util.puts('http proxy server ' + 'started '+ 'on port ' + '80,8892 ->443(web01:8892) : 80,8001->3001(soa:8001) : 16200->3002(soa:16200) ');
