@@ -40,7 +40,7 @@ var https = require('https'),
   var proxy8001 = httpProxy.createProxyServer();
   var server3 =http.createServer(function (req, res) {
     if(req.headers.host == null){ res.end('Something went wrong.Host not found.'); return;}
-    console.log("headers recieved from 8001:" + req.url);
+    //console.log("headers recieved from 8001:" + req.url);
     var soa_bool = req.url.match(/services/i);
     if(soa_bool) {
       console.log("matched services!")
