@@ -37,7 +37,18 @@ var https = require('https'),
 
   }).listen(80);
   //SOA
+  var proxy8001 = httpProxy.createProxyServer();
   var server3 =http.createServer(function (req, res) {
+    if(req.headers.host == null){ res.end('Something went wrong.Host not found.'); return;}
+    console.log("headers recieved from 8001:" + req.url);
+    var soa_bool = req.url.match(/services/i);
+    if(soa_bool) {
+      console.log("matched services!")
+      proxy8001.web(req, res, {
+        target: '192.168.0.6:8001'
+      });
+      return;
+    }
   //get rid of port number
   var index =req.headers.host.indexOf(":");
   var hostnameOnly = req.headers.host.substr(0,index);
@@ -139,6 +150,13 @@ soaProxy.on('error', function (err, req, res) {
   res.end('SOA went wrong. :-( \n' + "Proxy failed to connect to the Target URL=https://" + req.headers.host);
 });
 web01Proxy16200.on('error', function (err, req, res) {
+  console.log("Proxy failed to connect to the Target URL=https://" + req.headers.host);
+  res.writeHead(500, {
+    'Content-Type': 'text/plain'
+  });
+  res.end('SOA 16200 went wrong. :-( \n' + "Proxy failed to connect to the Target URL=https://" + req.headers.host);
+});
+proxy8001.on('error', function (err, req, res) {
   console.log("Proxy failed to connect to the Target URL=https://" + req.headers.host);
   res.writeHead(500, {
     'Content-Type': 'text/plain'
