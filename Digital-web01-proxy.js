@@ -45,7 +45,7 @@ var https = require('https'),
     if(soa_bool) {
       console.log("matched services!")
       proxy8001.web(req, res, {
-        target: '192.168.0.6:8001'
+        target: 'http://192.168.0.6:8001'
       });
       return;
     }
