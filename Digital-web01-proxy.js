@@ -58,17 +58,17 @@ var https = require('https'),
      res.end('Redirecting to SOA\n');
   }).listen(8001);
 
-  //UCM port 4444 straight http proxy
-  var proxy4444 = httpProxy.createProxyServer();
-  var server4 =http.createServer(function (req, res) {
-    if(req.headers.host == null){ res.end('Something went wrong.Host not found.'); return;}
-      //console.log("matched services!")
-      proxy4444.web(req, res, {
-        target: 'http://192.168.0.3:4444' //web01's internal UCM addr.
-      });
-      return;
+  // //UCM port 4444 straight http proxy
+  // var proxy4444 = httpProxy.createProxyServer();
+  // var server4 =http.createServer(function (req, res) {
+  //   if(req.headers.host == null){ res.end('Something went wrong.Host not found.'); return;}
+  //     //console.log("matched services!")
+  //     proxy4444.web(req, res, {
+  //       target: 'http://192.168.0.3:4444' //web01's internal UCM addr.
+  //     });
+  //     return;
   
-  }).listen(4444);
+  // }).listen(4444);
 
 
    //forward to web01's https proxy in the browser
@@ -97,11 +97,11 @@ var https = require('https'),
   // Handle your error here
   console.log(e);
   });
-  server4.on('error', function (e) {
-    console.log('crash on port 80');
-  // Handle your error here
-  console.log(e);
-  });
+  // server4.on('error', function (e) {
+  //   console.log('crash on port 80');
+  // // Handle your error here
+  // console.log(e);
+  // });
   soa_http_server16200.on('error', function (e) {
     console.log('crash on port 16200');
   // Handle your error here
@@ -182,12 +182,12 @@ proxy8001.on('error', function (err, req, res) {
   res.end('SOA 16200 went wrong. :-( \n' + "Proxy failed to connect to the Target URL=https://" + req.headers.host);
 });
 
-proxy4444.on('error', function (err, req, res) {
-  console.log("Proxy failed to connect to the Target URL=https://" + req.headers.host);
-  res.writeHead(500, {
-    'Content-Type': 'text/plain'
-  });
-  res.end('UCM 4444 went wrong. :-( \n' + "Proxy failed to connect to the Target URL=https://" + req.headers.host);
-});
+// proxy4444.on('error', function (err, req, res) {
+//   console.log("Proxy failed to connect to the Target URL=https://" + req.headers.host);
+//   res.writeHead(500, {
+//     'Content-Type': 'text/plain'
+//   });
+//   res.end('UCM 4444 went wrong. :-( \n' + "Proxy failed to connect to the Target URL=https://" + req.headers.host);
+// });
 
 util.puts('http proxy server ' + 'started '+ 'on port ' + '80,8892 ->443(web01:8892) : 80,8001->3001(soa:8001) : 16200->3002(soa:16200) 4444->(web01:4444)');
